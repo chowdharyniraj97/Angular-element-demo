@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, ViewEncapsulation, SimpleChange, SimpleChanges } from '@angular/core';
 import {WeatherService } from './weather.service';
+import {Weathermodel} from "../models/weathermodel";
 
 @Component({
   selector: 'app-weather',
@@ -10,6 +11,7 @@ import {WeatherService } from './weather.service';
 export class WeatherComponent implements OnChanges {
   @Input('location') location:string;
   @Input('unit') unit:string;
+  @Input() model : any;
   public errText: string = '';
   public weathersubscription;
   public temp:number;
@@ -23,6 +25,8 @@ export class WeatherComponent implements OnChanges {
   ) { }
 
   renderWeather() {
+    this.model = new Weathermodel({'location': this.location, 'unit':this.unit});
+    console.log(this.model);
     this.weathersubscription = this._ws.getWeather(this.location, this.unit).subscribe((data) => {
       this.errText = '';
       this.temp = Math.round(data.main.temp);
