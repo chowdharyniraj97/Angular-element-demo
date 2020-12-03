@@ -9,8 +9,8 @@ import {Weathermodel} from '../models/weathermodel';
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class WeatherComponent implements OnChanges {
-  @Input('location') location:string;
-  @Input('unit') unit:string;
+  // @Input('location') location:string;
+  // @Input('unit') unit:string;
   @Input() model : any;
   public errText: string = '';
   public weathersubscription;
@@ -26,20 +26,27 @@ export class WeatherComponent implements OnChanges {
 
   renderWeather() {
     // this.model = new Weathermodel({'location': this.location, 'unit':this.unit});
+    // console.log(this.model)
+      console.log(typeof this.model);
+      console.log(this.model);
+      console.log(this.model.location);
+      console.log(this.model.unit);
+      const myobj = JSON.parse(this.model)
+      console.log(myobj);
+      this.weathersubscription = this._ws.getWeather(myobj.location, myobj.unit).subscribe((data) => {
+        this.errText = '';
+        this.temp = Math.round(data.main.temp);
+        this.desc = data.weather[0].description;
+        this.weatherico = 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
+        this.city = data.name;
+        this.country = data.sys.country;
+        this.getLocalTime(data.coord.lat, data.coord.lon);
 
-    this.weathersubscription = this._ws.getWeather(this.location, this.unit).subscribe((data) => {
-      this.errText = '';
-      this.temp = Math.round(data.main.temp);
-      this.desc = data.weather[0].description;
-      this.weatherico = 'http://openweathermap.org/img/w/'+data.weather[0].icon+'.png';
-      this.city = data.name;
-      this.country = data.sys.country;
-      this.getLocalTime(data.coord.lat, data.coord.lon);
+      }, error => {
+        this.errText = error;
+      });
+    }
 
-    }, error => {
-      this.errText = error;
-    })
-  }
 
   getLocalTime(lat, long) {
     this._ws.getLocalTime(lat, long).subscribe((data) => {
@@ -48,14 +55,14 @@ export class WeatherComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(changes['location'] || changes['unit']){
-      if(this.weathersubscription) {
+    // if(changes['location'] || changes['unit']){
+      if (this.weathersubscription) {
         this.weathersubscription.unsubscribe();
       }
       this.renderWeather();
     }
 
-  }
+  // }
 
 
 }

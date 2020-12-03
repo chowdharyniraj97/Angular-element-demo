@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "wmodel": [
+        "dist/wmodel"
+      ],
+      "wmodel/*": [
+        "dist/wmodel/*"
+      ]
+    }
   }
 }

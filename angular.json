@@ -137,6 +137,41 @@
           }
         }
       }
+    },
+    "wmodel": {
+      "root": "projects/wmodel",
+      "sourceRoot": "projects/wmodel/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/wmodel/tsconfig.lib.json",
+            "project": "projects/wmodel/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/wmodel/src/test.ts",
+            "tsConfig": "projects/wmodel/tsconfig.spec.json",
+            "karmaConfig": "projects/wmodel/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wmodel/tsconfig.lib.json",
+              "projects/wmodel/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "weathercard"
