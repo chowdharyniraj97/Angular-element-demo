@@ -26,14 +26,21 @@ export class WeatherComponent implements OnChanges {
 
   renderWeather() {
     // this.model = new Weathermodel({'location': this.location, 'unit':this.unit});
-    // console.log(this.model)
-      console.log(typeof this.model);
-      console.log(this.model);
-      console.log(this.model.location);
-      console.log(this.model.unit);
+    // alert(this.model)
+    // console.log(JSON.stringify(this.model));
+    // alert(this.model.location)
+      // console.log(typeof this.model);
+      // console.log(this.model);
+    // console.log(JSON.stringify(typeof this.model));
+    //   console.log(JSON.stringify(this.model.location));
+      // console.log(this.model.unit);
+      // console.log(typeof this.model.location);
       const myobj = JSON.parse(this.model)
       console.log(myobj);
+    alert(this.model + 'from component')
+    console.log(this.model)
       this.weathersubscription = this._ws.getWeather(myobj.location, myobj.unit).subscribe((data) => {
+        console.log(data);
         this.errText = '';
         this.temp = Math.round(data.main.temp);
         this.desc = data.weather[0].description;

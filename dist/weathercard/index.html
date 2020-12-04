@@ -14,17 +14,22 @@
 <script type="text/javascript" src="/angular-weather-elements-master/dist/weathercard/weathercard.js"> </script>
 <script type = "module">
   import {Weathermodel} from "/angular-weather-elements-master//dist/wmodel/esm2015/lib/weathermodel.js"
-  var ele = new Weathermodel({'location': 'Mumbai', 'unit':'metrics'})
+  var ele = new Weathermodel({'location': 'Gainesville', 'unit':'metric'})
   var e = document.querySelectorAll("body *")[0]
-  console.log(e)
-  console.log(JSON.stringify(ele))
-  e.setAttribute("model",JSON.stringify(ele))
+  // var div = document.createElement('div');
+  // div.appendChild(document.createTextNode('top div'));
+  var newele = document.createElement("app-weather");
+  newele.model = JSON.stringify(ele)
+  // div.appendChild(newele)
+
+document.body.appendChild(newele);
+  var x = document.querySelectorAll("body *")
+  console.log(x)
+  // console.log(e)
+  // console.log(JSON.stringify(ele))
+  // e.model = ele
+  // e.setAttribute("model",JSON.stringify(ele))
   // console.log(e)
   // console.log(ele);
 </script>
 </html>
-
-
-
-
-
