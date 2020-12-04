@@ -9,20 +9,21 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <app-weather ></app-weather>
+<!--  <app-weather ></app-weather>-->
 </body>
 <script type="text/javascript" src="/angular-weather-elements-master/dist/weathercard/weathercard.js"> </script>
+<!--<script src="https://cdn.polyfill.io/v2/polyfill.js?features=es6"></script>-->
 <script type = "module">
   import {Weathermodel} from "/angular-weather-elements-master//dist/wmodel/esm2015/lib/weathermodel.js"
-  var ele = new Weathermodel({'location': 'Gainesville', 'unit':'metric'})
+  var ele = new Weathermodel({'location': 'Mumbai', 'unit':'metric'})
   var e = document.querySelectorAll("body *")[0]
   // var div = document.createElement('div');
   // div.appendChild(document.createTextNode('top div'));
   var newele = document.createElement("app-weather");
-  newele.model = JSON.stringify(ele)
+  newele.model = ele
   // div.appendChild(newele)
-
-document.body.appendChild(newele);
+console.log("hello")
+document.body.appendChild(newele);//triggers lifecycle hook
   var x = document.querySelectorAll("body *")
   console.log(x)
   // console.log(e)

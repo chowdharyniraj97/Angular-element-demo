@@ -35,11 +35,11 @@ export class WeatherComponent implements OnChanges {
     //   console.log(JSON.stringify(this.model.location));
       // console.log(this.model.unit);
       // console.log(typeof this.model.location);
-      const myobj = JSON.parse(this.model)
-      console.log(myobj);
+      // const myobj = JSON.parse(this.model)
+      // console.log(myobj);
     alert(this.model + 'from component')
     console.log(this.model)
-      this.weathersubscription = this._ws.getWeather(myobj.location, myobj.unit).subscribe((data) => {
+      this.weathersubscription = this._ws.getWeather(this.model.location, this.model.unit).subscribe((data) => {
         console.log(data);
         this.errText = '';
         this.temp = Math.round(data.main.temp);
@@ -62,6 +62,7 @@ export class WeatherComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log('HEYYYYYYYYYYY');
     // if(changes['location'] || changes['unit']){
       if (this.weathersubscription) {
         this.weathersubscription.unsubscribe();
